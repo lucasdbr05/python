@@ -1,0 +1,22 @@
+conta_Lucas = ContaCorrente('Lucas', '056.474.071-37', 1234, 14062)
+
+print(f'{conta_Lucas._nome}:{conta_Lucas.cpf}')
+conta_Lucas.depositar(10000)
+conta_Lucas.sacar(8000)
+conta_Lucas.consultar_saldo()
+conta_Lucas.cosultar_chequeespecial()
+print(conta_Lucas.transacoes)
+print('--'*20)
+
+conta_Nubia = ContaCorrente('Núbia', '111.222.333-45',1357,25173)
+conta_Lucas.transferir(2000, conta_Nubia)
+conta_Lucas.consultar_transacoes()
+conta_Nubia.consultar_transacoes()
+print('--'*20)
+cartao_Lucas = CartaoCredito('Lucas',conta_Lucas)
+print(cartao_Lucas.conta_corrente.conta)
+print(cartao_Lucas.numero)
+print(cartao_Lucas.validade)
+cartao_Lucas.senha= '2005'
+print(cartao_Lucas.senha)
+print(cartao_Lucas.__dict__)

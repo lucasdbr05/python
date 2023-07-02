@@ -1,0 +1,56 @@
+{% extends 'base.html' %}
+
+{% block body %}
+<div class="container">
+            <div class="row">
+                <div class="col">
+                    <form method="POST" action="" class="border p-4 mt-2" >
+                        {{formulario.csrf_token}}
+                        <legend>Criar Post</legend>
+                        <fieldset>
+                            <div class="form-group">
+                                {{formulario.titulo.label(class="form-control-label")}}
+                                {% if formulario.titulo.errors %}
+                                    {{formulario.titulo(class="form-control is-invalid")}}
+                                <div class="invalid-feedback">
+                                    {% for erro in formulario.titulo.errors %}
+                                        {{erro}}
+                                    {% endfor %}
+                                </div>
+                                {% else %}
+                                    {{formulario.titulo(class="form-control")}}
+                                {% endif %}
+                            </div>
+                            <div class="form-group">
+                                {{formulario.corpo.label(class="form-control-label")}}
+                                {% if formulario.corpo.errors %}
+                                    {{formulario.corpo(class="form-control is-invalid")}}
+                                <div class="invalid-feedback">
+                                    {% for erro in formulario.corpo.errors %}
+                                        {{erro}}
+                                    {% endfor %}
+                                </div>
+                                {% else %}
+                                    {{formulario.corpo(class="form-control")}}
+                                {% endif %}
+                            </div>
+                            <hr>
+                            <p>Cursos</p>
+                            {% for object in formulario %}
+                                {%if 'curso_' in object.name%}
+                                    <div class="form-group mt-2">
+                                        {{object(class="form-check-input")}}
+                                        {{object.label(class="form-check-label")}}
+                                    </div>
+                                {%endif%}
+                            {% endfor%}
+                        </fieldset>
+                        {{formulario.botao_submit(class="btn btn-primary mt-2")}}
+                    </form>
+                </div>
+                
+            </div>
+        </div>
+
+
+{% endblock %}
