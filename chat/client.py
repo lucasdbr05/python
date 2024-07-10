@@ -14,7 +14,7 @@ class Client():
         while True:
             try:
                 message = self.client.recv(1024).decode('ascii')
-                if message == "NICK":
+                if message == "TYPE YOUR NICK:":
                     self.client.send(self.nickname.encode('ascii'))
                 else: 
                     print(message)

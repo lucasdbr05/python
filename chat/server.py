@@ -16,7 +16,7 @@ class Server():
         self.server.bind((HOST, PORT))
         self.server.listen()
 
-    def broadcast(self,message):
+    def general_notification(self,message):
         for client in self.clients:
             client.send(message)
 
@@ -24,13 +24,13 @@ class Server():
         while True:
             try:
                 message = client.recv(1024)
-                self.broadcast(message)
+                self.general_notification(message)
             except:
                 index = self.clients.index(client)
                 self.clients.remove(client)
                 client.close()
                 nickname = self.nicknames[index]
-                self.broadcast(f"{nickname} left the chat".encode("ascii"))
+                self.general_notification(f"{nickname} left the chat".encode("ascii"))
                 self.nicknames.remove(nickname)
                 break
 
@@ -39,14 +39,14 @@ class Server():
             client, address = self.server.accept()
             print(f"Connected with {str(address)}")
 
-            client.send("Nick".encode("ascii"))
+            client.send("TYPE YOUR NICK:".encode("ascii"))
             nickname = client.recv(1024).decode("ascii")
 
             self.nicknames.append(nickname)
             self.clients.append(client)
 
             print(f"Nickname of the client is {nickname}")
-            self.broadcast(f"Nickname {nickname} joined the chat".encode("ascii"))
+            self.general_notification(f"Nickname {nickname} joined the chat".encode("ascii"))
             client.send("Connected to the server".encode("ascii"))
 
             thread = threading.Thread(target=self.handle, args=(client,))
