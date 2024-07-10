@@ -30,7 +30,7 @@ class Server():
                 self.clients.remove(client)
                 client.close()
                 nickname = self.nicknames[index]
-                self.broadcast(f"{self.nicknames} left the chat".encode("ascii"))
+                self.broadcast(f"{nickname} left the chat".encode("ascii"))
                 self.nicknames.remove(nickname)
                 break
 
